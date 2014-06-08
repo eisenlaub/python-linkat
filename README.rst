@@ -15,6 +15,16 @@ The Library is written in plain python and utilizes `cffi`_ to call native
 system functions and therefore depends on it.
 
 
+Documentation
+-------------
+
+This module provides only the 2 functions  ``linkat`` and ``symlinkat``
+and their constants which can be used as arguments for the ``flag`` parameter.
+For a more detailed documentation please look at the corresponding linux
+man pages for `linkat`_ and `symlinkat`_. If there was an error during 
+the system call, ``OSError`` with the corresponding error code will be raised.
+
+
 Installation
 ------------
 The package is available on `PyPI`_ and thus it can be installed with pip:
@@ -27,3 +37,5 @@ The package is available on `PyPI`_ and thus it can be installed with pip:
 .. _python-linkat: https://github.com/eisenlaub/python-linkat
 .. _PyPI: https://pypi.python.org/pypi/linkat/
 .. _cffi: https://cffi.readthedocs.org/
+.. _linkat: http://man7.org/linux/man-pages/man2/link.2.html
+.. _symlinkat: http://man7.org/linux/man-pages/man2/symlink.2.html
