@@ -1,2 +1,3 @@
 include README.rst
 include LICENSE
+prune linkat/__pycache__
