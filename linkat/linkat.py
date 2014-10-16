@@ -6,8 +6,10 @@ from linkat.ffi import ffi_lib
 
 
 AT_FDCWD = ffi_lib.AT_FDCWD
-AT_SYMLINK_FOLLOW = ffi_lib.AT_SYMLINK_FOLLOW
-AT_EMPTY_PATH = ffi_lib.AT_EMPTY_PATH
+if ffi_lib.AT_SYMLINK_FOLLOW != 0:
+    AT_SYMLINK_FOLLOW = ffi_lib.AT_SYMLINK_FOLLOW
+if ffi_lib.AT_EMPTY_PATH != 0:
+    AT_EMPTY_PATH = ffi_lib.AT_EMPTY_PATH
 
 
 def link_at(old_dir_fd, old_path, new_dir_fd, new_path, flags=0):
