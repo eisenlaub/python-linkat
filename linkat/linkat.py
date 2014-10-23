@@ -2,12 +2,14 @@
 from __future__ import absolute_import, print_function, unicode_literals
 import os
 
-from linkat.ffi import ffi_lib
+from linkat.ffi import ffi, ffi_lib
 
 
 AT_FDCWD = ffi_lib.AT_FDCWD
-AT_SYMLINK_FOLLOW = ffi_lib.AT_SYMLINK_FOLLOW
-AT_EMPTY_PATH = ffi_lib.AT_EMPTY_PATH
+if ffi_lib.AT_SYMLINK_FOLLOW != 0:
+    AT_SYMLINK_FOLLOW = ffi_lib.AT_SYMLINK_FOLLOW
+if ffi_lib.AT_EMPTY_PATH != 0:
+    AT_EMPTY_PATH = ffi_lib.AT_EMPTY_PATH
 
 
 def link_at(old_dir_fd, old_path, new_dir_fd, new_path, flags=0):
@@ -64,7 +66,7 @@ def link_at(old_dir_fd, old_path, new_dir_fd, new_path, flags=0):
     """
     out = ffi_lib.linkat(old_dir_fd, old_path, new_dir_fd, new_path, flags)
     if out == -1:
-        raise OSError(ffi_lib.errno, os.strerror(ffi_lib.errno))
+        raise OSError(ffi.errno, os.strerror(ffi.errno))
     return out
 
 
@@ -91,5 +93,5 @@ def symlink_at(target, new_dir_fd, link_path):
     """
     out = ffi_lib.symlinkat(target, new_dir_fd, link_path)
     if out == -1:
-        raise OSError(ffi_lib.errno, os.strerror(ffi_lib.errno))
+        raise OSError(ffi.errno, os.strerror(ffi.errno))
     return out

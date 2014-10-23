@@ -18,6 +18,12 @@ int symlinkat(const char *target, int newdirfd, const char *linkpath);
 ffi_lib = ffi.verify("""
 #include <fcntl.h>
 #include <unistd.h>
+#ifndef AT_SYMLINK_FOLLOW
+#  define AT_SYMLINK_FOLLOW 0
+#endif
+#ifndef AT_EMPTY_PATH
+#  define AT_EMPTY_PATH 0
+#endif
 """,  ext_package='linkat')
 
 
